@@ -1,0 +1,28 @@
+#
+# 'make'              build executable file 'myMeshGwApp'
+# 'make clean'      removes all .o and executable files
+#
+
+# define the C compiler to use
+CC = gcc
+
+# define any compile-time flags
+CFLAGS = -Wall -g
+
+# define the executable file 
+MAIN = myMeshGwApp
+
+.PHONY:  $(MAIN)   clean
+
+$(MAIN):  
+	$(MAKE) -C src
+	mv ./src/$(MAIN)    ./ 
+
+clean:
+	-rm -f $(MAIN)
+	-rm -f ./src/menu/*.o
+	-rm -f ./src/core/*.o
+	-rm -f ./src/models/*.o
+	-rm -f ./src/utils/*.o
+	@(cd ./src;$(MAKE)  clean)
+
